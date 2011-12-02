@@ -1,0 +1,10 @@
+#/bin/bash
+
+for i in {A..Z}; do
+   eval "sudo sed -i 75s/.*$/'\$img'\-\>charset=\ \'$i\'';'/ /var/www/securimage/securimage_show.php"
+    mkdir $i
+    for x in `seq 1 100`;do
+        wget -O "./$i/$i$x.png" http://localhost/securimage/securimage_show.php
+    
+    done;
+done;
