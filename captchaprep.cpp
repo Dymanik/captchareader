@@ -15,14 +15,14 @@ int main(int argc,char* argv[]){
 		if(!img.data ){ continue; }
 		temp = img>128;
 
-		Mat element = getStructuringElement( MORPH_RECT, Size( 3, 3 )); 
+		Mat element = getStructuringElement( MORPH_RECT, Size( 5, 5 )); 
 
 		/// Apply the dilation operation
 		dilate( temp, img, element );
 		erode( img, temp, element );
 
     	Rect roi(20,20,60,60);
-		resize(temp(roi), img,Size(20,20) ,0 , 0, INTER_NEAREST);
+		resize(temp(roi), img,Size(40,40) ,0 , 0, INTER_NEAREST);
 		imwrite(argv[i],img);
 	}
 	return 0;
