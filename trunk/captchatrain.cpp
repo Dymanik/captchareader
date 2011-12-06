@@ -13,6 +13,7 @@ int main(int argc, char * argv[]){
 
     if(argc<3){
         cout << "Usage: ./" << argv[0] << " < Outfile Net > < Train Case 1 >...< Train Case N >" << endl;
+        exit(-1);
     }
 
     //Red neuronal
@@ -76,7 +77,7 @@ int main(int argc, char * argv[]){
       Layer 2: 100 neurons (hidden layer)
       Layer 3: 26 neurons (1 output)
      */
-    neuralLayers.at<int>(0)=400;
+    neuralLayers.at<int>(0)=1600;
     neuralLayers.at<int>(1)=100;
     neuralLayers.at<int>(2)=26;
 
