@@ -15,7 +15,7 @@ int main(int argc,char* argv[]){
 		if(!img.data ){ continue; }
 		temp = img>128;
 
-		Mat element = getStructuringElement( MORPH_RECT, Size( 5, 5 )); 
+		Mat element = getStructuringElement( MORPH_RECT, Size( 6, 6 )); 
 
 		/// Apply the dilation operation
 		dilate( temp, img, element );

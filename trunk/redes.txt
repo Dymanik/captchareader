@@ -1,0 +1,4 @@
+el numero indica la cantidad de neuronas en la capa oculta
+a* entrenadas con dato1 limpiadas con treshold 3
+b* entrenadas con dato2 limpiadas con treshold 5
+c* ""          "   "     "         "   "       3 y 5
