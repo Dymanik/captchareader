@@ -78,7 +78,7 @@ int main(int argc, char * argv[]){
       Layer 3: 26 neurons (1 output)
      */
     neuralLayers.at<int>(0)=1600;
-    neuralLayers.at<int>(1)=100;
+    neuralLayers.at<int>(1)=150;
     neuralLayers.at<int>(2)=26;
 
     //Create our ANN.
