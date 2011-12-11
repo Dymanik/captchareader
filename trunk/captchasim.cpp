@@ -61,17 +61,22 @@ int main(int argc, char *argv[]){
     red.predict(trainData, closeenough);
 
     int k=0;
+	int corr =0;
     for(int i=0; i<train_sample_count; i++){
+		float max=-2;
+		int m=0;
         for(int j=0; j<26; j++){
-            if(closeenough.at<float>(i,j)>0){
-                k++;
-                printf("%c",j+'A');
-                break;
+            if(closeenough.at<float>(i,j)>max){
+                m=j;
+				max=closeenough.at<float>(i,j);
             }
         }
+        printf("%c",m+'A');
+		if(k+'A'==m+'A')corr++;
         if((i+1)%100==0){
-            printf(" %d\n",k);
-            k=0;
+            printf(" %d\n",corr);
+            k++;
+			corr=0;
         }
     }
 }
