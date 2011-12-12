@@ -9,10 +9,11 @@
 using namespace std;
 using namespace cv;
 
+//Comite: red33.xml red35.xml red356dos.xml
 int main(int argc, char *argv[]){
     
     if(argc<3){
-        cout << "Usage: ./" << argv[0] << " < Infile Net > < Test Case 1 >...< Test Case N >" << endl;
+        cout << "Usage: ./" << argv[0] << " < Infile Net1 > <Infile Net 2> <Infile Net3> < Test Case 1 >...< Test Case N >" << endl;
         exit(-1);
     }
 
