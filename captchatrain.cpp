@@ -23,27 +23,31 @@ int main(int argc, char * argv[]){
 
     //Shuffling data
     int arr[argc-2];
-    for(int i=2;i<argc;i++){
-        arr[i]=i;
+    for(int i=0;i<argc-2;i++){
+        arr[i]=i+2;
     }
 
     srand(time (NULL));
     int swap1, swap2, temp;
 
     for(int i=0; i<10000; i++){
-        swap1=rand()%argc-2;
-        swap2=rand()%argc-2;
+        swap1=rand()%(argc-2);
+        swap2=rand()%(argc-2);
 
         if(swap1==swap2){
             i--;
         }else{
-            temp= array[swap1];
-            array[swap1]=array[swap2];
-            array[swap2]=temp;
+            temp= arr[swap1];
+            arr[swap1]=arr[swap2];
+            arr[swap2]=temp;
         }
     }
 
-    for(int i =2; i<argc; i++){
+    /*for(int i=0; i<argc-2;i++){
+        cout << arr[i] << endl;
+    }*/
+
+    for(int i =0; i<argc-2; i++){
 
         //Se leen las imagenes por argumentos
         src = imread(argv[arr[i]],CV_LOAD_IMAGE_GRAYSCALE);
@@ -51,13 +55,14 @@ int main(int argc, char * argv[]){
         //cout << argv[i][6] << argv[i][6]-'A' <<  endl;
 
         Mat out(1,26,CV_32FC1,Scalar(-1));
-        out.at<float>(argv[i][6]-'A')=1;
+        //cout << argv[arr[i]][18] << endl;
+        out.at<float>(argv[arr[i]][18]-'A')=1;
         output.push_back(out);
 
         //cout << out<<endl;
 
         if(!src.data){
-            cout << "Error al leer la imagen" << endl;
+            cout << "Error al leer la imagen " << argv[arr[i]] << endl;
             continue;
         }
 

@@ -9,11 +9,11 @@ using namespace cv;
 
 /* Noise reduction */
 
-Mat lessnoise(char * imagen){
-    Mat img = imread(imagen,CV_LOAD_IMAGE_GRAYSCALE);
+void lessnoise(char * imagen, Mat img){
+    img = imread(imagen,CV_LOAD_IMAGE_GRAYSCALE);
 	Mat temp;
 
-	if(!img.data ){ continue; }
+	//if(!img.data ){ continue; }
 	temp = img>128;
 
 	Mat element = getStructuringElement( MORPH_RECT, Size( 6, 6 )); 
@@ -26,7 +26,6 @@ Mat lessnoise(char * imagen){
     Rect roi(20,20,60,60);
 	resize(temp(roi), img,Size(40,40) ,0 , 0, INTER_NEAREST);
 
-    return img;
 	//imwrite(imagen,img);
 
 }
@@ -38,23 +37,23 @@ int main(int argc,char* argv[]){
 
 	for(int i=1;i<argc;i++){
 
-        Mat img;
-        img=lessnoise(argv[i]);
-    /*
+     //   Mat img;
+    //    lessnoise(argv[i],img);
+    
 		Mat img = imread(argv[i],CV_LOAD_IMAGE_GRAYSCALE);
 		Mat temp;
 
 		if(!img.data ){ continue; }
 		temp = img>128;
 
-		Mat element = getStructuringElement( MORPH_RECT, Size( 6, 6 )); 
+		Mat element = getStructuringElement( MORPH_RECT, Size( 5, 5 )); 
 
 		/// Apply the dilation operation
 		dilate( temp, img, element );
 		erode( img, temp, element );
 
     	Rect roi(20,20,60,60);
-		resize(temp(roi), img,Size(40,40) ,0 , 0, INTER_NEAREST);*/
+		resize(temp(roi), img,Size(40,40) ,0 , 0, INTER_NEAREST);
 
 		imwrite(argv[i],img);
 	}
