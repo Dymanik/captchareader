@@ -2,4 +2,5 @@
 #include <highgui.h>
 #include <cv.h>
 
-Mat lessnoise(char * imagen);
+using namespace cv;
+void lessnoise(char * imagen,Mat img);

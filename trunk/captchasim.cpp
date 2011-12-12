@@ -10,6 +10,11 @@ using namespace cv;
 
 int main(int argc, char *argv[]){
     
+    if(argc<3){
+        cout << "Usage: ./" << argv[0] << " < Infile Net > < Test Case 1 >...< Test Case N >" << endl;
+        exit(-1);
+    }
+
     CvANN_MLP red;
     red.load(argv[1]);
 
