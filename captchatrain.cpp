@@ -8,7 +8,6 @@
 using namespace cv;
 using namespace std;
 
-//Calcular Histogramas
 int main(int argc, char * argv[]){
 
     if(argc<3){
@@ -22,10 +21,32 @@ int main(int argc, char * argv[]){
     //Matrices
     Mat input, output, src, dst;
 
+    //Shuffling data
+    int arr[argc-2];
+    for(int i=2;i<argc;i++){
+        arr[i]=i;
+    }
+
+    srand(time (NULL));
+    int swap1, swap2, temp;
+
+    for(int i=0; i<10000; i++){
+        swap1=rand()%argc-2;
+        swap2=rand()%argc-2;
+
+        if(swap1==swap2){
+            i--;
+        }else{
+            temp= array[swap1];
+            array[swap1]=array[swap2];
+            array[swap2]=temp;
+        }
+    }
+
     for(int i =2; i<argc; i++){
 
         //Se leen las imagenes por argumentos
-        src = imread(argv[i],CV_LOAD_IMAGE_GRAYSCALE);
+        src = imread(argv[arr[i]],CV_LOAD_IMAGE_GRAYSCALE);
 
         //cout << argv[i][6] << argv[i][6]-'A' <<  endl;
 
@@ -73,8 +94,8 @@ int main(int argc, char * argv[]){
 
     //Setting the number of neurons on each layer of the ANN
 
-    /*We have in Layer 1: 400 neurons (2 inputs)
-      Layer 2: 100 neurons (hidden layer)
+    /*We have in Layer 1: 1600 neurons (2 inputs)
+      Layer 2: 150 neurons (hidden layer)
       Layer 3: 26 neurons (1 output)
      */
     neuralLayers.at<int>(0)=1600;
@@ -85,8 +106,6 @@ int main(int argc, char * argv[]){
     red.create(neuralLayers);
 
     //Train it with our data.
-    //See the Machine learning reference at
-    //http://www.seas.upenn.edu/~bensapp/opencvdocs/ref/opencvref_ml.htm#ch_ann
     red.train(
             trainData,
             trainClasses,
