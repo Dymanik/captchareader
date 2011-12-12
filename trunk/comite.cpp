@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
+#include <string.h>
 
 using namespace std;
 using namespace cv;
@@ -71,118 +72,22 @@ int main(int argc, char *argv[]){
     red2.predict(trainData, closeenough2);
     red3.predict(trainData, closeenough3);
 
-    float sum1=0;
-    float sum2=0;
-    float sum3=0;
+    float sum[26];
+    int k=0;
+    int corr =0;
 
     for(int i=0;i<train_sample_count;i++){
-        sum1 = sum2 = sum3 = 0;
+        memset(sum,0,sizeof(float)*26);
+		float max=-2;
+		int m=0;
         for(int j=0; j<26; j++){
-           sum1=sum1+closeenough1.at<float>(i,j); 
-           sum2=sum2+closeenough2.at<float>(i,j); 
-           sum3=sum3+closeenough3.at<float>(i,j); 
-        }
-
-        int k=0;
-    	int corr =0;
-		float max=-2;
-		int m=0;
-
-        /*cout << sum1 << " " << sum2 << " " << sum3 << endl;
-
-        if(sum1>sum2){
-            if(sum3>sum1){
-                cout << "sum3" << endl;
-            }else{
-                cout << "sum1" << endl;
-            }
-        }else{
-            if(sum3>sum2){
-                cout << "sum3" << endl;
-            }else{
-                cout << "sum2" << endl;
-            }
-        }*/
-
-        if(sum1>sum2){
-            if(sum3>sum1){
-                for(int b=0; b<26; b++){
-                    if(closeenough3.at<float>(i,b)>max){
-                        m=b;
-				        max=closeenough3.at<float>(i,b);
-                    }
-                }
-                printf("%c",m+'A');
-		        if(k+'A'==m+'A')corr++;
-                if((i+1)%100==0){
-                    printf(" %d\n",corr);
-                    k++;
-			        corr=0;
-                }
-
-            }else{
-                for(int b=0; b<26; b++){
-                    if(closeenough1.at<float>(i,b)>max){
-                        m=b;
-				        max=closeenough1.at<float>(i,b);
-                    }
-                }
-                printf("%c",m+'A');
-		        if(k+'A'==m+'A')corr++;
-                if((i+1)%100==0){
-                    printf(" %d\n",corr);
-                    k++;
-			        corr=0;
-                }
-
-            }
-        }else{
-            if(sum3>sum2){
-                for(int b=0; b<26; b++){
-                    if(closeenough3.at<float>(i,b)>max){
-                        m=b;
-				        max=closeenough3.at<float>(i,b);
-                    }
-                }
-                printf("%c",m+'A');
-		        if(k+'A'==m+'A')corr++;
-                if((i+1)%100==0){
-                    printf(" %d\n",corr);
-                    k++;
-			        corr=0;
-                }
-
-            }else{
-                for(int b=0; b<26; b++){
-                    if(closeenough2.at<float>(i,b)>max){
-                        m=b;
-				        max=closeenough2.at<float>(i,b);
-                    }
-                }
-                printf("%c",m+'A');
-		        if(k+'A'==m+'A')corr++;
-                if((i+1)%100==0){
-                    printf(" %d\n",corr);
-                    k++;
-			        corr=0;
-                }
-
-            }
-
-        }
-    }
-
-    /*int k=0;
-	int corr =0;
-    for(int a=0; a<train_sample_count; a++){
-		float max=-2;
-		int m=0;
-        for(int b=0; b<26; b++){
-            if(closeenough.at<float>(a,b)>max){
-                m=b;
-				max=closeenough.at<float>(a,b);
+            sum[j]=closeenough1.at<float>(i,j)+closeenough2.at<float>(i,j)+closeenough3.at<float>(i,j); 
+            if(sum[j]>max){
+                m=j;
+				max=sum[j];
             }
         }
+
         printf("%c",m+'A');
 		if(k+'A'==m+'A')corr++;
         if((i+1)%100==0){
@@ -190,6 +95,6 @@ int main(int argc, char *argv[]){
             k++;
 			corr=0;
         }
-    }*/
+    }
 
 }
